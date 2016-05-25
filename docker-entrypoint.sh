@@ -9,14 +9,15 @@ if [ -n "${DOCKERIZE_GET}" ]; then
     arr=$(echo $DOCKERIZE_GET | tr ";" "\n")
     for x in $arr
     do
+        # source filename without params
+        source_filename_with_params=$(basename "$x")
+        source_filename="${source_filename_with_params%%\?*}"
         # create exec string for download
-        wget_cmd="wget -q --no-check-certificate --directory-prefix=$VOLUME/ $x"
+        wget_cmd="wget -q --no-check-certificate -O $VOLUME/$source_filename $x"
 
         echo $wget_cmd
         # run download
         `$wget_cmd`
-        # get source file name
-        source_filename=$(basename "$x")
         # get generated file name
         filename=`echo "$source_filename" | sed -e 's/\(.tmpl\)*$//g'`
         # add to templates for dockerize
