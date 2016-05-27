@@ -47,7 +47,7 @@ and save this to `/config/sensu`
 
 ## Example
 
-```docker run -v /config -e DH_sensu=negash.ru/s/sensu -e DF_sensu=api.json.tmpl;transport.json.tmpl --name config negash/dockerize```
+```docker run -v /config -e DH_sensu=negash.ru/s/sensu -e 'DF_sensu=api.json.tmpl;transport.json.tmpl' --name config negash/dockerize```
 
 ## License
 
