@@ -28,7 +28,22 @@ docker pull negash/dockerize
 
 ## API Reference
 
-All files save in folder in `ENV` variable `VOLUME` default `/config`
+To add a folder in `/volume`, you can use the following hacks:
+
+pass `ENV` variable DH_* and DF_*
+```
+...
+-e DH_sensu=negash.ru/s/sensu
+-e DF_sensu=api.json.tmpl;transport.json.tmpl
+...
+```
+
+and after start container get files:
+
+http://negash.ru/s/sensu/api.json.tmpl
+http://negash.ru/s/sensu/transport.json.tmpl
+
+and save this to `/config/sensu`
 
 ## License
 

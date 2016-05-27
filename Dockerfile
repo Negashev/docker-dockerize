@@ -13,4 +13,6 @@ COPY ./docker-entrypoint.sh /
 
 RUN chmod +x /docker-entrypoint.sh
 
+VOLUME /config
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
