@@ -2,6 +2,7 @@
 # temp string
 TEMP=""
 
+mkdir $VOLUME
 for_download() {
     appendHost=""
     if [ -n "${3}" ]; then

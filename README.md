@@ -28,7 +28,10 @@ docker pull negash/dockerize
 
 ## API Reference
 
-To add a folder in `/volume`, you can use the following hacks:
+
+default volume in `ENV` variable `VOLUME` = `/config`
+
+To add a folder in default volume, you can use the following hacks:
 
 pass `ENV` variable DH_* and DF_*
 ```
