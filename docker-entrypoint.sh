@@ -16,12 +16,23 @@ for_download() {
         source_filename="${source_filename_with_params%%\?*}"
         # create exec string for download
         wget_cmd="wget -q --no-check-certificate -O $1/$source_filename $appendHost$x"
-
-        echo $wget_cmd
-        # run download
-        `$wget_cmd`
-        # check download
-        if [ $? -ne 0 ]; then
+        status=0
+        for i in `seq 1 5`
+        do
+            echo $wget_cmd
+            # run download
+            `$wget_cmd`
+            # check download
+            if [ $? -ne 0 ]; then
+                echo "try $i download template $appendHost$x"
+                status=1
+                continue
+            else
+                status=0
+                break
+            fi
+        done
+        if [ $status -ne 0 ]; then
             echo "can't download template $appendHost$x"
             exit 1
         fi
