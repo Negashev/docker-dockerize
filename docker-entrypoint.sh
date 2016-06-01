@@ -15,7 +15,7 @@ for_download() {
         source_filename_with_params=$(basename "$x")
         source_filename="${source_filename_with_params%%\?*}"
         # create exec string for download
-        wget_cmd="wget -q --no-check-certificate -O $1/$source_filename $appendHost$x"
+        wget_cmd="wget -q --no-check-certificate -O /tmp/$1/$source_filename $appendHost$x"
         status=0
         for i in `seq 1 5`
         do
@@ -39,7 +39,7 @@ for_download() {
         # get generated file name
         filename=`echo "$source_filename" | sed -e 's/\(.tmpl\)*$//g'`
         # add to templates for dockerize
-        TEMP="-template $1/$source_filename:$1/$filename $TEMP"
+        TEMP="-template /tmp/$1/$source_filename:$1/$filename $TEMP"
     done
 }
 
@@ -66,7 +66,7 @@ do
     files="${folder_files#$folder=}"
     # create folder
     this_foulder="$VOLUME/$folder"
-    mkdir $this_foulder
+    mkdir $this_foulder /tmp/$this_foulder
     # run download
     for_download $this_foulder $files $host
 done
