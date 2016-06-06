@@ -1,15 +1,14 @@
-FROM alpine
+FROM busybox
 MAINTAINER Negash <i@negash.ru>
-
-RUN apk add --update wget
 
 ENV DOCKERIZE_VERSION v0.2.0
 
-ENV VOLUME /config
+ADD https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz /dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-RUN wget --no-check-certificate https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm -rf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+RUN tar -C /bin -xzvf /dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm -rf /dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+ENV VOLUME /config
 
 COPY ./docker-entrypoint.sh /
 
