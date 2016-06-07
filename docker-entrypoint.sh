@@ -42,8 +42,13 @@ for_download() {
         fi
         # get generated file name
         filename=`echo "$source_filename" | sed -e 's/\(.tmpl\)*$//g'`
-        # add to templates for dockerize
-        TEMP="-template $tmp_path/$source_filename:$1/$filename $TEMP"
+        if [ "$filename" = "$source_filename" ]; then
+            echo "$filename not replace"
+            mv "$tmp_path/$source_filename" "$1/$filename"
+        else
+            # add to templates for dockerize
+            TEMP="-template $tmp_path/$source_filename:$1/$filename $TEMP"
+        fi;
     done
 }
 
