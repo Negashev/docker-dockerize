@@ -82,6 +82,6 @@ done
 echo "$TEMP"
 if [ "$TEMP" == "" ]; then
 	echo "templates not ready or download"
-	exit 1
+	exit 0
 fi
 dockerize $TEMP $@
