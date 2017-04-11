@@ -1,5 +1,10 @@
-FROM busybox
+FROM alpine
 MAINTAINER Negash <i@negash.ru>
+
+RUN apk --update upgrade && \
+    apk add wget ca-certificates && \
+    update-ca-certificates && \
+    rm -rf /var/cache/apk/*
 
 ENV DOCKERIZE_VERSION v0.2.0
 
