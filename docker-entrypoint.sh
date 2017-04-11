@@ -2,7 +2,7 @@
 # temp string
 TEMP=""
 
-mkdir $VOLUME
+mkdir -p $VOLUME
 for_download() {
     appendHost=""
     if [ -n "${3}" ]; then
@@ -16,7 +16,7 @@ for_download() {
         source_filename="${source_filename_with_params%%\?*}"
         tmp_path=$(echo "$1" | sha256sum | base64 | head -c 32 ; echo)
         tmp_path="/tmp/$tmp_path"
-        mkdir $tmp_path
+        mkdir -p $tmp_path
 
         # create exec string for download
         wget_cmd="wget -q --no-check-certificate -O $tmp_path/$source_filename $appendHost$x"
